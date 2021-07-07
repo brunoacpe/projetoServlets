@@ -1,0 +1,7 @@
+Servlet\CommerceServlet.class
+Services\ProdutoServices.class
+DAO\ProdutoDAO.class
+DAO\ProdutoDAOImpl.class
+Model\Produto.class
+Services\ProdutoServicesImpl.class
+Model\MensagemErro.class
