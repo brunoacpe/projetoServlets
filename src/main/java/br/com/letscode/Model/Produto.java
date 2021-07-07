@@ -17,8 +17,6 @@ public class Produto {
     private String nomeProduto;
     private BigDecimal preco;
     private String ID;
-    private BigDecimal precoAvista;
-    private BigDecimal precoParcelado;
     private String formaPagamento;
 
 }
