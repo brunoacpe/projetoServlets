@@ -10,7 +10,9 @@ import lombok.Setter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,17 +40,26 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
     @Override
     public Produto adicionar(Produto produto) throws IOException {
+
         try(BufferedWriter bf = Files.newBufferedWriter(path)){
             bf.write(formatar(produto));
         }
+
         return produto;
     }
 
     @Override
-    public Optional<Produto> getPorNome(String nome) {//TODO -- PODEM EXISTIR PRODUTOS COM NOMES IGUAIS
+    public Optional<Produto> getPorNome(String nome) {
         List<Produto> produtos = getAll();
         return produtos.stream().filter(n -> n.getNomeProduto().equalsIgnoreCase(nome)).findFirst();
     }
+
+    @Override
+    public Optional<Produto> getPorID(String ID) {
+        List<Produto> produtos = getAll();
+        return produtos.stream().filter(n -> n.getID().equalsIgnoreCase(ID)).findFirst();
+    }
+
 
     @Override
     public List<Produto> getAll() {
@@ -77,16 +88,24 @@ public class ProdutoDAOImpl implements ProdutoDAO{
     }
     @Override
     public Produto remover(Produto produto) throws IOException {
-        //TODO -- REMOVER PELO ID E NÃO PELO NOME (PODEM TER NOMES IGUAIS)
+
+        List<String>  x = new ArrayList<>();
+
         String id = produto.getID();
         String line;
         try(BufferedReader br = Files.newBufferedReader(path)){
             while(!(line = br.readLine()).equals("")){
-                if (line.contains(id)){
-                    //TODO-- APAGAR A LINHA;
+                    if(!line.contains(id)){
+                        x.add(line);
+                    }
                 }
             }
+
+        Files.delete(path);
+        PrintWriter writer = new PrintWriter( ".\\src\\main\\java\\br\\com\\letscode\\EstoqueFile\\estoque.txt", StandardCharsets.UTF_8);
+        for(String s:x){
+            writer.write(s);
         }
-        return null;
+        return produto;
     }
 }

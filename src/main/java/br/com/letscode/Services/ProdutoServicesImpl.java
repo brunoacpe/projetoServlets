@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
@@ -25,6 +26,8 @@ public class ProdutoServicesImpl implements ProdutoServices{
         //Gerando o ID random.
         //TODO -- Fazer a validação do tipo de pagamento para diminuir ou aumentar o preço.
         produto.setID(UUID.randomUUID().toString());
+        String formaPagamento = produto.getFormaPagamento();
+
         return produtoDAO.adicionar(produto);
     }
 
