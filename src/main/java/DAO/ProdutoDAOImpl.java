@@ -76,6 +76,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
     }
     @Override
     public Produto remover(Produto produto) {
+        //TODO -- REMOVER PELO ID E NÃO PELO NOME (PODEM TER NOMES IGUAIS)
         return null;
     }
 }

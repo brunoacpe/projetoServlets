@@ -35,6 +35,8 @@ public class CommerceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //1 -- Aqui estamos criando um objeto Produto por meio da requisição.
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
         BufferedReader br = req.getReader();
         String line = "";
         StringBuilder conteudo = new StringBuilder();
@@ -58,7 +60,7 @@ public class CommerceServlet extends HttpServlet {
             resposta = gson.toJson(mensagemErro);
         } else {
             //4 -- Abrindo uma sessão para salvar requests.
-            HttpSession httpSession = req.getSession();
+            HttpSession httpSession = req.getSession(true);
             List<Produto> produtos;
             if((produtos =  (List<Produto>) httpSession.getAttribute(PRODUTOS_SESSION))==null){
                 produtos = new ArrayList<>();
