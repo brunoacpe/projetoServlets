@@ -7,5 +7,5 @@ import java.io.IOException;
 public interface ProdutoServices {
 
     Produto adicionar(Produto produto) throws IOException;
-    Produto remover(Produto produto);
+    Produto remover(Produto produto) throws IOException;
 }

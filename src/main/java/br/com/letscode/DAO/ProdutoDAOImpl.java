@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -75,8 +76,17 @@ public class ProdutoDAOImpl implements ProdutoDAO{
         return produto;
     }
     @Override
-    public Produto remover(Produto produto) {
+    public Produto remover(Produto produto) throws IOException {
         //TODO -- REMOVER PELO ID E NÃO PELO NOME (PODEM TER NOMES IGUAIS)
+        String id = produto.getID();
+        String line;
+        try(BufferedReader br = Files.newBufferedReader(path)){
+            while(!(line = br.readLine()).equals("")){
+                if (line.contains(id)){
+                    //TODO-- APAGAR A LINHA;
+                }
+            }
+        }
         return null;
     }
 }

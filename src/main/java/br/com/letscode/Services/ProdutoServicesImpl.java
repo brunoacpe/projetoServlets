@@ -29,7 +29,7 @@ public class ProdutoServicesImpl implements ProdutoServices{
     }
 
     @Override
-    public Produto remover(Produto produto) {
+    public Produto remover(Produto produto) throws IOException {
         //TODO-- Implementar este método
         return produtoDAO.remover(produto);
     }
