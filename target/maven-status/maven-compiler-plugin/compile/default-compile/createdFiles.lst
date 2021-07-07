@@ -1,7 +1,7 @@
-Servlet\CommerceServlet.class
-Services\ProdutoServices.class
-DAO\ProdutoDAO.class
-DAO\ProdutoDAOImpl.class
-Model\Produto.class
-Services\ProdutoServicesImpl.class
-Model\MensagemErro.class
+br\com\letscode\DAO\ProdutoDAO.class
+br\com\letscode\Services\ProdutoServices.class
+br\com\letscode\Model\Produto.class
+br\com\letscode\Services\ProdutoServicesImpl.class
+br\com\letscode\Servlet\CommerceServlet.class
+br\com\letscode\DAO\ProdutoDAOImpl.class
+br\com\letscode\Model\MensagemErro.class
