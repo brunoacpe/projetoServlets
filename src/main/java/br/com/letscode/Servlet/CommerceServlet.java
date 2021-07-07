@@ -34,6 +34,7 @@ public class CommerceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //TODO-- ERRO AQUI;
         //1 -- Aqui estamos criando um objeto Produto por meio da requisição.
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
@@ -85,7 +86,7 @@ public class CommerceServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         if(pesquisaNome!=null&& Objects.nonNull(produtoList)){
-            Optional<Produto> optionalProduto = produtoList.stream().filter(n -> n.getNomeProduto()==pesquisaNome).findFirst();
+            Optional<Produto> optionalProduto = produtoList.stream().filter(n -> n.getNomeProduto().equals(pesquisaNome)).findFirst();
             if(optionalProduto.isPresent()){
                 print.write(gson.toJson(optionalProduto.get()));
             } else {
