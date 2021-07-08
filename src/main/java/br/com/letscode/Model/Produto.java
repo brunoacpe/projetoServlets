@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class Produto {
 
     private String nomeProduto;
-    private BigDecimal preco;
+    private String preco;
     private String ID;
     private String formaPagamento;
 

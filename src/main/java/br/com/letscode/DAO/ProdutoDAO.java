@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ProdutoDAO {
 
     Produto adicionar(Produto produto) throws IOException;
-    Optional<Produto> getPorNome(String nome);
+    List<Produto> getPorNome(String nome);
     Optional<Produto> getPorID(String ID);
     List<Produto> getAll();
     String formatar(Produto produto);
