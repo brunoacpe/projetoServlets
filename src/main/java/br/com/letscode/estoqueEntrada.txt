@@ -1,1 +1,4 @@
-9d4683b4-dd2e-4cc0-a00f-1a87aea31ccd;gtx 1030;2000.00;3000.00
+8653209e-de75-4337-b257-c219069c81e6;Processador AMD Ryzen 5 5600X, Cache 35MB, 3.7GHz (4.6GHz Max Turbo), AM4 - 100-100000065BOX;1804.90;2123.41
+1122177f-b3b3-46af-b41e-f22ad791636c;Processador Intel Core i9-10850K, Cache 20MB, 3.6GHz (5.2GHz Turbo Max), LGA1200 - BX8070110850K;2799.90;3294.41
+214ad457-c8af-48b7-84ca-faf46ccff0bc;HD Seagate BarraCuda, 1TB, 3.5´, SATA - ST1000DM010;239.90;282.99
+ba24adb5-2ada-4295-a099-007d38536c70;Smart TV LG 43´ Full HD, WiFi, Bluetooth, HDR, ThinQAI, compatível com Inteligência Artificial - 43LM6370PSB;2399.90;2525.99

@@ -33,7 +33,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
     private String caminho = "C:\\Users\\Eu\\Documents\\GitHub\\ecommerceServlet\\src\\main\\java\\br\\com\\letscode\\estoqueEntrada.txt";
     private Path path;
     private Path pathSaida;
-    private String caminhoSaida = "C:\\Users\\Eu\\Documents\\GitHub\\ecommerceServlet\\src\\main\\java\\br\\com\\letscode\\estoqueSaida.txt.txt";
+    private String caminhoSaida = "C:\\Users\\Eu\\Documents\\GitHub\\ecommerceServlet\\src\\main\\java\\br\\com\\letscode\\estoqueSaida.txt";
 
 
     @PostConstruct
@@ -81,7 +81,11 @@ public class ProdutoDAOImpl implements ProdutoDAO{
         return String.format("%s;%s;%s;%s\r\n",produto.getID(),produto.getNomeProduto(),produto.getPrecoVista(),produto.getPrecoParcelado());
     }
     public String formatarParaSaida(Produto produto){
-        return String.format("%s;%s\r\n",produto.getID(),produto.getFormaPagamento());
+        if(produto.getFormaPagamento().equalsIgnoreCase("vista")){
+            return String.format("%s;%s;%s;%s\r\n",produto.getID(),produto.getNomeProduto(),produto.getFormaPagamento(),produto.getPrecoVista());
+        }
+        return String.format("%s;%s;%s;%s\r\n",produto.getID(),produto.getNomeProduto(),produto.getFormaPagamento(),produto.getPrecoParcelado());
+
     }
     public Produto converterLinhaEmProduto(String linha){
         StringTokenizer st = new StringTokenizer(linha,";");
