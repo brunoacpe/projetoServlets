@@ -23,11 +23,12 @@ public class ProdutoServicesImpl implements ProdutoServices{
 
     @Override
     public Produto adicionar(Produto produto) throws IOException {
-        //Gerando o ID random.
-        //TODO -- Fazer a validação do tipo de pagamento para diminuir ou aumentar o preço.
         produto.setID(UUID.randomUUID().toString());
         String formaPagamento = produto.getFormaPagamento();
-
+        BigDecimal taxaVista = new BigDecimal("0.10");
+        if(formaPagamento=="a vista"){
+            produto.setPreco(produto.getPreco().subtract(produto.getPreco().multiply(taxaVista)));
+        }
         return produtoDAO.adicionar(produto);
     }
 

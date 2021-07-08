@@ -80,7 +80,7 @@ public class CommerceServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Gson gson = new Gson();
+
         String pesquisaNome = req.getParameter("nome");
         HttpSession httpSession =req.getSession();
         List<Produto> produtoList = (List<Produto>) httpSession.getAttribute(PRODUTOS_SESSION);
@@ -103,4 +103,17 @@ public class CommerceServlet extends HttpServlet {
         }
         print.close();
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        String id = req.getParameter("id");
+        HttpSession httpSession = req.getSession();
+        List<Produto> produtoList = (List<Produto>) httpSession.getAttribute(PRODUTOS_SESSION);
+        PrintWriter print = resp.getWriter();
+
+    }
+
+
 }

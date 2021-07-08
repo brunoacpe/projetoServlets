@@ -101,7 +101,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
             }
 
         Files.delete(path);
-        PrintWriter writer = new PrintWriter( ".\\src\\main\\java\\br\\com\\letscode\\EstoqueFile\\estoque.txt", StandardCharsets.UTF_8);
+        PrintWriter writer = new PrintWriter("C:\\Users\\Eu\\Documents\\GitHub\\ecommerceServlet\\src\\main\\java\\br\\com\\letscode\\estoque.txt", StandardCharsets.UTF_8);
         for(String s:x){
             writer.write(s);
         }
