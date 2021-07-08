@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -46,7 +45,13 @@ public class ProdutoServicesImpl implements ProdutoServices{
     }
 
     @Override
-    public Optional<Produto> getPorID(String id) {
+    public List<Produto> getPorID(String id) {
         return produtoDAO.getPorID(id);
+    }
+
+    @Override
+    public Produto sairEstoque(Produto produto, String formaPagamento) {
+        produto.setFormaPagamento(formaPagamento);
+        return produtoDAO.controleEstoque(produto);
     }
 }

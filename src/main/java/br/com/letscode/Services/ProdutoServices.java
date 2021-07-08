@@ -12,5 +12,8 @@ public interface ProdutoServices {
     Produto remover(String ID) throws IOException;
     List<Produto> printAll();
     List<Produto> getPorNome(String nome);
-    Optional<Produto> getPorID(String id);
+    List<Produto> getPorID(String id);
+
+    Produto sairEstoque(Produto produto, String formaPagamento);
+
 }

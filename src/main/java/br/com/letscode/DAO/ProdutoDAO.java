@@ -10,8 +10,9 @@ public interface ProdutoDAO {
 
     Produto adicionar(Produto produto) throws IOException;
     List<Produto> getPorNome(String nome);
-    Optional<Produto> getPorID(String ID);
+    List<Produto> getPorID(String ID);
     List<Produto> getAll();
     String formatar(Produto produto);
     Produto remover(String ID) throws IOException;
+    Produto controleEstoque(Produto produto);
 }

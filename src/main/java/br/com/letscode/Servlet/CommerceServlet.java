@@ -44,7 +44,7 @@ public class CommerceServlet extends HttpServlet {
         Produto produtoReq = gson.fromJson(conteudo.toString(),Produto.class);
         PrintWriter print = prepareResponse(resp);
         String resposta = "";
-        if(produtoReq.getNomeProduto()==null||produtoReq.getPreco()==null||produtoReq.getFormaPagamento()==null){
+        if(produtoReq.getNomeProduto()==null||produtoReq.getPrecoVista()==null||produtoReq.getPrecoParcelado()==null){
             MensagemErro mensagemErro = new MensagemErro("Parâmetros inválidos.",HttpServletResponse.SC_BAD_REQUEST);
             resp.setStatus(mensagemErro.getStatus());
             resposta = gson.toJson(mensagemErro);
@@ -90,12 +90,15 @@ public class CommerceServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ID = req.getParameter("id");
+        String formaPagamento = req.getParameter("formaPagamento");
         PrintWriter printWriter = prepareResponse(resp);
         String resposta;
-        if(Objects.isNull(ID)){
+        if(Objects.isNull(ID)||Objects.isNull(formaPagamento)){
             resposta = erroMessage(resp);
         } else {
+            List<Produto> produto = produtoServices.getPorID(ID);
             produtoServices.remover(ID);
+            produtoServices.sairEstoque(produto.get(0),formaPagamento);
             resposta = gson.toJson(new MensagemErro("Produto removido", 204));
             req.getSession().setAttribute(PRODUTOS_SESSION,produtoServices.printAll());
         }
