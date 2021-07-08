@@ -5,6 +5,7 @@ import br.com.letscode.Model.MensagemErro;
 import br.com.letscode.Model.Produto;
 import br.com.letscode.Services.ProdutoServices;
 import com.google.gson.Gson;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,36 +32,37 @@ public class CommerceServlet extends HttpServlet {
     @Inject
     private ProdutoServices produtoServices;
     public static final String PRODUTOS_SESSION = "produtos";
+    private Gson gson;
 
+    @PostConstruct
+    public void init(){
+        gson = new Gson();
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //TODO-- ERRO AQUI;
-        //1 -- Aqui estamos criando um objeto Produto por meio da requisição.
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         BufferedReader br = req.getReader();
         String line = "";
         StringBuilder conteudo = new StringBuilder();
-        Gson gson = new Gson();
         while((line= br.readLine())!=null){
             conteudo.append(line);
         }
         Produto produtoReq = gson.fromJson(conteudo.toString(),Produto.class);
 
-        //2 -- Setando o tipo do conteúdo que tera na página.
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        //3 -- Criando a mensagem de resposta
         PrintWriter print = resp.getWriter();
         String resposta = "";
-        //Caso algum parametro esteja null :
+        
         if(produtoReq.getNomeProduto()==null||produtoReq.getPreco()==null||produtoReq.getFormaPagamento()==null){
             MensagemErro mensagemErro = new MensagemErro("Parâmetros inválidos.",HttpServletResponse.SC_BAD_REQUEST);
             resp.setStatus(mensagemErro.getStatus());
             resposta = gson.toJson(mensagemErro);
         } else {
-            //4 -- Abrindo uma sessão para salvar requests.
+
             HttpSession httpSession = req.getSession(true);
             List<Produto> produtos;
             if((produtos =  (List<Produto>) httpSession.getAttribute(PRODUTOS_SESSION))==null){

@@ -32,8 +32,8 @@ public class ProdutoServicesImpl implements ProdutoServices{
     }
 
     @Override
-    public Produto remover(Produto produto) throws IOException {
+    public Produto remover(String ID) throws IOException {
         //TODO-- Implementar este método
-        return produtoDAO.remover(produto);
+        return produtoDAO.remover(ID);
     }
 }

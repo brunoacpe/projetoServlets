@@ -13,5 +13,5 @@ public interface ProdutoDAO {
     Optional<Produto> getPorID(String ID);
     List<Produto> getAll();
     String formatar(Produto produto);
-    Produto remover(Produto produto) throws IOException;
+    Produto remover(String ID) throws IOException;
 }

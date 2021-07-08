@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -16,12 +17,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -29,7 +30,7 @@ import java.util.stream.Stream;
 @NoArgsConstructor
 public class ProdutoDAOImpl implements ProdutoDAO{
 
-    private String caminho = ".\\src\\main\\java\\br\\com\\letscode\\EstoqueFile\\estoque.txt";
+    private String caminho = "C:\\Users\\Eu\\Documents\\GitHub\\ecommerceServlet\\src\\main\\java\\br\\com\\letscode\\estoque.txt";
     private Path path;
 
 
@@ -41,7 +42,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
     @Override
     public Produto adicionar(Produto produto) throws IOException {
 
-        try(BufferedWriter bf = Files.newBufferedWriter(path)){
+        try(BufferedWriter bf = Files.newBufferedWriter(path, StandardOpenOption.APPEND)){
             bf.write(formatar(produto));
         }
 
@@ -74,7 +75,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
     @Override
     public String formatar(Produto produto) {
-        return String.format("%s;%s;%f;%s",produto.getID(),produto.getNomeProduto(),produto.getPreco(),produto.getFormaPagamento());
+        return String.format("%s;%s;%f;%s\r\n",produto.getID(),produto.getNomeProduto(),produto.getPreco(),produto.getFormaPagamento());
     }
 
     public Produto converterLinhaEmProduto(String linha){
@@ -87,15 +88,13 @@ public class ProdutoDAOImpl implements ProdutoDAO{
         return produto;
     }
     @Override
-    public Produto remover(Produto produto) throws IOException {
-
+    public Produto remover(String ID) throws IOException {
         List<String>  x = new ArrayList<>();
 
-        String id = produto.getID();
         String line;
         try(BufferedReader br = Files.newBufferedReader(path)){
             while(!(line = br.readLine()).equals("")){
-                    if(!line.contains(id)){
+                    if(!line.contains(ID)){
                         x.add(line);
                     }
                 }
@@ -106,6 +105,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
         for(String s:x){
             writer.write(s);
         }
-        return produto;
+
+        return null;
     }
 }
